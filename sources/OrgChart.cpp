@@ -9,25 +9,23 @@ namespace ariel {
     // constractor:
     OrgChart::OrgChart() : _rootNode(nullptr) {}
 
-    OrgChart::OrgChart(const OrgChart &chart2) {}
-
     // destractor:
     OrgChart::~OrgChart() {
         this->clearChart();
     }
 
     // set root:
-    OrgChart &OrgChart::add_root(const string &rootName) {
+    OrgChart &OrgChart::add_root(const string &rootNodeObject) {
 
         if (_rootNode == nullptr) {
-            NodeObject *rootNode = new NodeObject(rootName);
+            NodeObject *rootNode = new NodeObject(rootNodeObject);
             this->_rootNode = rootNode;
         } else {
             string previousName = this->_rootNode->getName();
-            this->_rootNode->setName(rootName);
+            this->_rootNode->setName(rootNodeObject);
             this->_namesMap.erase(previousName);
         }
-        this->_namesMap.insert({rootName, this->_rootNode});
+        this->_namesMap.insert({rootNodeObject, this->_rootNode});
 
         return *this;
     }
@@ -71,40 +69,67 @@ namespace ariel {
     // Level Iterator:
 
     LevelIterator OrgChart::begin() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return LevelIterator(this->_rootNode);
     }
 
     LevelIterator OrgChart::end() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return LevelIterator(nullptr);
     }
 
     LevelIterator OrgChart::begin_level_order() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return LevelIterator(this->_rootNode);
     }
 
     LevelIterator OrgChart::end_level_order() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return LevelIterator(nullptr);
     }
 
     // Pre Order Iterator:
     PreOrderIterator OrgChart::begin_preorder() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return PreOrderIterator(this->_rootNode);
     }
 
     PreOrderIterator OrgChart::end_preorder() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return PreOrderIterator(nullptr);
     }
 
     // Reverse Iterator:
     ReverseIterator OrgChart::begin_reverse_order() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return ReverseIterator(this->_rootNode);
     }
 
     ReverseIterator OrgChart::reverse_order() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return OrgChart::end_reverse_order();
     }
 
     ReverseIterator OrgChart::end_reverse_order() {
+        if(this->_rootNode == nullptr){
+            throw invalid_argument("chart is empty, there is no root node!");
+        }
         return ReverseIterator(nullptr);
     }
 
@@ -115,9 +140,4 @@ namespace ariel {
         outputStream << "...";
         return outputStream;
     }
-
-    OrgChart &OrgChart::operator=(OrgChart &otherChart) {
-        return *this;
-    }
-
 }

@@ -34,7 +34,7 @@ namespace ariel {
     // add kids:
     void ReverseIterator::pushNodeObjectKids(NodeObject *nodeObg) {
         if (!nodeObg->getKids().empty()) {
-            const vector<NodeObject *> kids = nodeObg->getKids();
+            const vector<NodeObject *> &kids = nodeObg->getKids();
             auto startObj = kids.crbegin();
             auto endObj = kids.crend();
             for (; startObj != endObj; ++startObj) {

@@ -32,7 +32,7 @@ namespace ariel {
 
         // operators:
 
-        NodeObject & operator*() const { return *_pointer; }
+        string operator*() const { return _pointer->getName(); }
 
         NodeObject * operator->() { return _pointer; }
 

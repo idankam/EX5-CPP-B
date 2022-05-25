@@ -25,9 +25,15 @@ namespace ariel {
         void addKid(NodeObject *newkid);
         const vector<NodeObject *> &getKids() const;
         size_t size();
+        size_t length();
+        char at(size_t pos);
 
+        const string getName() {return _name;}
         friend ostream &operator<<(ostream &outputStream, const NodeObject &currNodeObject);
-    };
+        friend bool operator==(const NodeObject obj, const string name);
+        friend bool operator==(const string name, const NodeObject obj);
+        
+   };
 }
 
 #endif
